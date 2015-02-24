@@ -1,5 +1,5 @@
 /**
- * Moneycounts
+ * Rainmaker
  * 
  * Controls:
  * WASD movement
@@ -20,8 +20,8 @@ long timeOfLastUpdate;
 
 // movement variables
 final int MIN_SPEED = 1;
-final int MAX_SPEED = 10;
-final int ACCEL = 1;
+final int MAX_SPEED = 15;
+final int ACCEL = 2;
 int speed = MIN_SPEED; // constrained to ints [1, 100] in ardrone library
 
 // action vairables
@@ -48,7 +48,7 @@ void setup() {
       ardrone.connectNav(); // for getting sensor information
       ardrone.connectVideo(); // for getting video information
       ardrone.start(); // start to control AR.Drone and get sensor and video data of it
-      ardrone.setMaxAltitude(10);
+      ardrone.setMaxAltitude(40);
     }
     
     // begin recording time for votes-update lifecycle
@@ -182,6 +182,7 @@ void keyPressed() {
         if (keyCode == CONTROL) { // land! 
           ardrone.landing(); 
           noLoop();
+          println("Stopped! Battery: " + ardrone.getBatteryPercentage());
         }
     } 
     else {
